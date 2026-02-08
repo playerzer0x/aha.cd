@@ -31,7 +31,30 @@
       <a href="#locations">locations</a>
       <a href="#contact">contact</a>
     </div>
+    <button class="nav-burger" aria-label="Open menu">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <circle cx="14" cy="14" r="13" stroke="#1A2744" stroke-width="1.5" fill="none"/>
+        <circle cx="14" cy="14" r="4" stroke="#1A2744" stroke-width="1" fill="none"/>
+        <line x1="14" y1="1" x2="14" y2="10" stroke="#1A2744" stroke-width="0.5" opacity="0.3"/>
+        <line x1="14" y1="18" x2="14" y2="27" stroke="#1A2744" stroke-width="0.5" opacity="0.3"/>
+        <line x1="1" y1="14" x2="10" y2="14" stroke="#1A2744" stroke-width="0.5" opacity="0.3"/>
+        <line x1="18" y1="14" x2="27" y2="14" stroke="#1A2744" stroke-width="0.5" opacity="0.3"/>
+      </svg>
+    </button>
   </nav>
+
+  <!-- Mobile sidebar -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="sidebar" id="sidebar">
+    <button class="sidebar-close" aria-label="Close menu">&times;</button>
+    <div class="sidebar-links">
+      <a href="#about">about</a>
+      <a href="#services">services</a>
+      <a href="#pricing">pricing</a>
+      <a href="#locations">locations</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
 
   <!-- Hero Section with Draggable CDs -->
   <section id="hero" class="hero">
@@ -161,28 +184,13 @@
   <section id="locations" class="section section-locations">
     <div class="section-inner">
       <h2 class="section-title">locations</h2>
-      <p class="section-intro">we currently offer drop-off and pick-up service in the following areas. more coming soon!</p>
+      <p class="section-intro">we currently offer <span class="text-orange">drop-off</span> and <span class="text-orange">pick-up</span> service in the following areas. more coming soon!</p>
       <div class="locations-grid">
-        <div class="location-card">
-          <h3>highland park</h3>
-          <p>drop-off &amp; pick-up</p>
-        </div>
-        <div class="location-card">
-          <h3>mount washington</h3>
-          <p>drop-off &amp; pick-up</p>
-        </div>
-        <div class="location-card">
-          <h3>eagle rock</h3>
-          <p>drop-off &amp; pick-up</p>
-        </div>
-        <div class="location-card">
-          <h3>glendale</h3>
-          <p>drop-off &amp; pick-up</p>
-        </div>
-        <div class="location-card">
-          <h3>pasadena</h3>
-          <p>drop-off &amp; pick-up</p>
-        </div>
+        <div class="location-card"><h3>highland park</h3></div>
+        <div class="location-card"><h3>mount washington</h3></div>
+        <div class="location-card"><h3>eagle rock</h3></div>
+        <div class="location-card"><h3>glendale</h3></div>
+        <div class="location-card"><h3>pasadena</h3></div>
       </div>
     </div>
   </section>

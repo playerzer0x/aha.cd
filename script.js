@@ -239,6 +239,51 @@
     });
   }
 
+  // ---------- Mobile Sidebar ----------
+  function initSidebar() {
+    const burger = document.querySelector('.nav-burger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const closeBtn = document.querySelector('.sidebar-close');
+    const sidebarLinks = document.querySelectorAll('.sidebar-links a');
+
+    if (!burger || !sidebar) return;
+
+    function openSidebar() {
+      sidebar.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    burger.addEventListener('click', openSidebar);
+    closeBtn.addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar);
+
+    sidebarLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        closeSidebar();
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            const navHeight = document.querySelector('.nav').offsetHeight;
+            const targetPos = target.getBoundingClientRect().top + window.scrollY - navHeight;
+            setTimeout(() => {
+              window.scrollTo({ top: targetPos, behavior: 'smooth' });
+            }, 300);
+          }
+        }
+      });
+    });
+  }
+
   // ---------- Init Everything ----------
   function init() {
     initCDRotations();
@@ -248,6 +293,7 @@
     initNavScroll();
     initScrollHint();
     initHoverEffects();
+    initSidebar();
   }
 
   if (document.readyState === 'loading') {
