@@ -876,42 +876,70 @@ a {
 }
 
 /* ---------- Services Section ---------- */
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.service-card {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  padding: 1.5rem 0.5rem;
-  transition: transform 0.2s ease;
-}
-
-.service-card:hover {
-  transform: translateY(-2px);
-}
-
-.service-icon {
-  margin-bottom: 1.25rem;
-}
-
-.service-card h3 {
+.services-subtitle {
   font-family: var(--font-display);
   font-size: 1.4rem;
   font-weight: 400;
-  margin-bottom: 0.75rem;
   color: var(--blue-deep);
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
 }
 
-.service-card p {
+.how-it-works {
+  list-style: none;
+  counter-reset: steps;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.how-it-works li {
+  counter-increment: steps;
+  position: relative;
+  padding-left: 2.25rem;
+  margin-bottom: 1.25rem;
   font-size: 0.95rem;
   font-weight: 300;
   color: var(--text-soft);
   line-height: 1.7;
+}
+
+.how-it-works li::before {
+  content: counter(steps) ".";
+  position: absolute;
+  left: 0;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--orange);
+}
+
+.how-it-works li strong {
+  font-weight: 500;
+  color: var(--blue-deep);
+}
+
+.what-you-get {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.what-you-get li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+.what-you-get li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--orange);
+  font-weight: 400;
 }
 
 /* ---------- Pricing Section ---------- */
@@ -1174,10 +1202,6 @@ a {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
-  .services-grid {
-    grid-template-columns: 1fr;
-  }
-
   .locations-grid {
     grid-template-columns: repeat(5, 1fr);
   }
