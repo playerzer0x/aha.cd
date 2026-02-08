@@ -746,7 +746,7 @@ a {
   font-size: 1.1rem;
   font-weight: 300;
   color: var(--text-soft);
-  max-width: 560px;
+  max-width: 720px;
   margin-bottom: 3rem;
   line-height: 1.7;
 }
@@ -765,12 +765,10 @@ a {
 }
 
 .about-lead {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-style: italic;
-  line-height: 1.6;
-  color: var(--text);
-  margin-bottom: 1.5rem;
+  color: var(--text-soft);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  font-weight: 300;
 }
 
 .about-text p {
@@ -835,6 +833,122 @@ a {
   font-weight: 300;
   color: var(--text-soft);
   line-height: 1.7;
+}
+
+/* ---------- Pricing Section ---------- */
+.pricing-intro {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--text-soft);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.pricing-single {
+  margin-bottom: 2.5rem;
+}
+
+.pricing-single-inner {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.pricing-label {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-soft);
+  font-weight: 400;
+}
+
+.pricing-amount {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--blue-deep);
+  letter-spacing: -0.02em;
+}
+
+.pricing-per {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  font-weight: 300;
+}
+
+.pricing-bundles-intro {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--blue-deep);
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.pricing-card {
+  position: relative;
+  text-align: left;
+  padding: 2rem 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-2px);
+}
+
+.pricing-card--popular {
+  border-left: 1.5px solid var(--border);
+  border-right: 1.5px solid var(--border);
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -0.5rem;
+  left: 1.5rem;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+  background: rgba(200, 120, 78, 0.08);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+
+.pricing-tier {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--blue-deep);
+  margin-bottom: 0.75rem;
+}
+
+.pricing-price {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: var(--blue-deep);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-details {
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+}
+
+.pricing-unit {
+  font-size: 0.85rem;
+  color: var(--orange);
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 /* ---------- Locations Section ---------- */
@@ -1028,6 +1142,18 @@ a {
 }
 
 @media (max-width: 600px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .pricing-card--popular {
+    border-left: none;
+    border-right: none;
+    border-top: 1.5px solid var(--border);
+    border-bottom: 1.5px solid var(--border);
+  }
+
   .nav {
     padding: 1rem 1.25rem;
   }
