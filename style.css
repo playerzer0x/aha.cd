@@ -1,0 +1,1099 @@
+/* ============================================
+   aha.cd — Style Sheet
+   Retro poster aesthetic with swirling CDs
+   on graph paper background
+   ============================================ */
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #F2F0E8;
+  --bg-grid: rgba(200, 125, 80, 0.14);
+  --bg-grid-strong: rgba(195, 115, 70, 0.22);
+  --orange: #C8784E;
+  --text: #1A2744;
+  --text-soft: #4A5A74;
+  --blue-deep: #0D3B66;
+  --blue-mid: #1A5FA0;
+  --blue-bright: #2878C8;
+  --blue-light: #6AAEE0;
+  --blue-pale: #A8D4F0;
+  --blue-wash: #D0E8F8;
+  --accent: #1A5FA0;
+  --accent-light: #2878C8;
+  --cream: #F5F2E8;
+  --border: #D0CFC4;
+
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+
+  --cd-size: 180px;
+  --cd-size-small: 125px;
+  --cd-size-large: 260px;
+  --cd-size-tiny: 60px;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  /* Graph paper grid */
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 29px,
+      var(--bg-grid) 29px,
+      var(--bg-grid) 30px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 29px,
+      var(--bg-grid) 29px,
+      var(--bg-grid) 30px
+    );
+  background-size: 30px 30px;
+}
+
+/* Slight paper grain overlay on body */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--orange);
+  color: white;
+}
+
+/* ---------- Navigation ---------- */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2.5rem;
+  background: rgba(242, 240, 232, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: all 0.3s ease;
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--blue-deep);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-logo:hover {
+  text-decoration: none;
+}
+
+.nav-logo:hover {
+  color: var(--blue-bright);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-soft);
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: var(--blue-deep);
+}
+
+/* ---------- Hero Section ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 2rem 2rem;
+  overflow: hidden;
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 10;
+  pointer-events: none;
+  max-width: 640px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 9vw, 7rem);
+  font-weight: 400;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--blue-deep);
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+  font-weight: 400;
+  color: var(--text-soft);
+  line-height: 1.5;
+  max-width: 450px;
+  margin: 0 auto;
+  letter-spacing: 0.04em;
+}
+
+.hero-tagline {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  /* lowercase throughout */
+  color: var(--text-soft);
+  margin-top: 1.5rem;
+  opacity: 0.7;
+}
+
+/* ---------- CD Scatter Container ---------- */
+.cd-scatter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* ---------- CD Component ---------- */
+.cd {
+  position: absolute;
+  left: var(--cd-x, 50%);
+  top: var(--cd-y, 50%);
+  width: var(--cd-size);
+  height: var(--cd-size);
+  pointer-events: all;
+  cursor: grab;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+  transform: rotate(var(--cd-rotate, 0deg));
+  z-index: 5;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.cd:hover {
+  z-index: 20;
+  transform: rotate(var(--cd-rotate, 0deg)) scale(1.08);
+  filter: drop-shadow(0 8px 24px rgba(13, 59, 102, 0.2));
+}
+
+.cd.dragging {
+  cursor: grabbing;
+  z-index: 100;
+  transition: filter 0.2s ease;
+  transform: rotate(var(--cd-rotate, 0deg)) scale(1.12);
+  filter: drop-shadow(0 16px 40px rgba(13, 59, 102, 0.25));
+}
+
+.cd-small {
+  width: var(--cd-size-small);
+  height: var(--cd-size-small);
+}
+
+.cd-large {
+  width: var(--cd-size-large);
+  height: var(--cd-size-large);
+  position: relative;
+}
+
+.cd-tiny {
+  width: var(--cd-size-tiny);
+  height: var(--cd-size-tiny);
+  position: relative;
+  cursor: default;
+  pointer-events: none;
+}
+
+.cd-surface {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  /* Bold dark outline */
+  border: 2.5px solid #2A2A2A;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.12),
+    0 8px 28px rgba(0, 0, 0, 0.1),
+    inset 0 0 20px rgba(0, 0, 0, 0.06);
+}
+
+.cd:hover .cd-surface,
+.cd.dragging .cd-surface {
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.18),
+    0 16px 48px rgba(0, 0, 0, 0.14),
+    inset 0 0 20px rgba(0, 0, 0, 0.06);
+}
+
+.cd-tiny .cd-surface {
+  border-width: 1.5px;
+}
+
+/* CD Ring — visible concentric track grooves */
+.cd-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(
+      circle at center,
+      transparent 0px,
+      transparent 2.5px,
+      rgba(0, 0, 0, 0.04) 3px,
+      rgba(255, 255, 255, 0.03) 3.5px,
+      transparent 4px
+    );
+  z-index: 2;
+}
+
+/* CD inner ring (data area boundary) */
+.cd-ring::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30%;
+  height: 30%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 0 3px rgba(0, 0, 0, 0.06),
+    inset 0 0 3px rgba(0, 0, 0, 0.04);
+}
+
+/* CD Center Hole — metallic spindle hub */
+.cd-hole {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16%;
+  height: 16%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 40% 35%,
+    #E8E4D8 0%,
+    #D4D0C4 30%,
+    #C0BCA8 60%,
+    #ACA894 100%
+  );
+  border: 2px solid #2A2A2A;
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.3),
+    0 1px 3px rgba(0, 0, 0, 0.15);
+  z-index: 3;
+}
+
+.cd-hole::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 60%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 45% 40%,
+    #F0ECE0 0%,
+    #DCD8CC 50%,
+    #C8C4B4 100%
+  );
+  border: 1.5px solid rgba(0, 0, 0, 0.18);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.cd-hole::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30%;
+  height: 30%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* CD Sheen — multi-layer realistic reflection */
+.cd-sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    /* Primary highlight spot */
+    radial-gradient(
+      ellipse at 32% 28%,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 25%,
+      transparent 55%
+    ),
+    /* Secondary softer glow */
+    radial-gradient(
+      ellipse at 70% 65%,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 40%
+    ),
+    /* Subtle rainbow edge reflection */
+    conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      rgba(255, 180, 120, 0.06) 20deg,
+      transparent 40deg,
+      rgba(120, 200, 255, 0.06) 80deg,
+      transparent 100deg,
+      rgba(180, 120, 255, 0.05) 160deg,
+      transparent 180deg,
+      rgba(120, 255, 180, 0.05) 230deg,
+      transparent 260deg,
+      rgba(255, 120, 150, 0.06) 310deg,
+      transparent 340deg,
+      transparent 360deg
+    );
+  z-index: 4;
+  animation: shimmer 14s linear infinite;
+}
+
+/* Dark radial streaks for realism (like the poster) */
+.cd-sheen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(0, 0, 0, 0.08) 3deg,
+    transparent 6deg,
+    transparent 20deg,
+    rgba(0, 0, 0, 0.06) 22deg,
+    transparent 25deg,
+    transparent 45deg,
+    rgba(0, 0, 0, 0.1) 47deg,
+    transparent 50deg,
+    transparent 72deg,
+    rgba(0, 0, 0, 0.05) 74deg,
+    transparent 77deg,
+    transparent 95deg,
+    rgba(0, 0, 0, 0.08) 97deg,
+    transparent 100deg,
+    transparent 130deg,
+    rgba(0, 0, 0, 0.07) 132deg,
+    transparent 135deg,
+    transparent 160deg,
+    rgba(0, 0, 0, 0.09) 162deg,
+    transparent 165deg,
+    transparent 190deg,
+    rgba(0, 0, 0, 0.06) 192deg,
+    transparent 195deg,
+    transparent 220deg,
+    rgba(0, 0, 0, 0.08) 222deg,
+    transparent 225deg,
+    transparent 255deg,
+    rgba(0, 0, 0, 0.07) 257deg,
+    transparent 260deg,
+    transparent 290deg,
+    rgba(0, 0, 0, 0.09) 292deg,
+    transparent 295deg,
+    transparent 320deg,
+    rgba(0, 0, 0, 0.06) 322deg,
+    transparent 325deg,
+    transparent 350deg,
+    rgba(0, 0, 0, 0.08) 352deg,
+    transparent 355deg,
+    transparent 360deg
+  );
+  mix-blend-mode: multiply;
+}
+
+@keyframes shimmer {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Stacked CDs Image Element ---------- */
+.draggable-image {
+  position: absolute;
+  left: var(--cd-x, 50%);
+  top: var(--cd-y, 50%);
+  pointer-events: all;
+  cursor: grab;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+  transform: rotate(var(--cd-rotate, 0deg));
+  z-index: 5;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.draggable-image:hover {
+  z-index: 20;
+  transform: rotate(var(--cd-rotate, 0deg)) scale(1.06);
+}
+
+.draggable-image.dragging {
+  cursor: grabbing;
+  z-index: 100;
+  transition: filter 0.2s ease;
+  transform: rotate(var(--cd-rotate, 0deg)) scale(1.1);
+}
+
+.draggable-image img {
+  width: 170px;
+  height: auto;
+  pointer-events: none;
+  display: block;
+}
+
+.draggable-image img.img-medium {
+  width: 170px;
+}
+
+.draggable-image img.img-cd {
+  width: 170px;
+}
+
+.draggable-image img.img-person {
+  width: 180px;
+}
+
+.draggable-image .cd-label {
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--blue-deep);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.draggable-image:hover .cd-label {
+  opacity: 0.8;
+}
+
+/* CD Label */
+.cd-label {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--blue-deep);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cd:hover .cd-label {
+  opacity: 0.8;
+}
+
+
+/* ============================================
+   CD Swirl Color Variants — Pinwheel Patterns
+   Each variant creates a repeating conic
+   gradient that produces the swirl arms.
+   ============================================ */
+
+/* --- Blues (Deep ocean swirl) --- */
+[data-color="blue-deep"] .cd-surface {
+  background:
+    radial-gradient(circle at center, transparent 14%, rgba(0,0,0,0.04) 15%, transparent 16%, transparent 100%),
+    conic-gradient(
+      from 0deg,
+      #0D3B66, #174F84, #2166A4, #3A88C4, #6AADE0, #9CCBF0, #CDE6F8, #E8E4D8,
+      #0D3B66, #174F84, #2166A4, #3A88C4, #6AADE0, #9CCBF0, #CDE6F8, #E8E4D8,
+      #0D3B66, #174F84, #2166A4, #3A88C4, #6AADE0, #9CCBF0, #CDE6F8, #E8E4D8,
+      #0D3B66, #174F84, #2166A4, #3A88C4, #6AADE0, #9CCBF0, #CDE6F8, #E8E4D8
+    );
+}
+
+/* --- Blues Bright (Lighter swirl) --- */
+[data-color="blue-bright"] .cd-surface {
+  background:
+    radial-gradient(circle at center, transparent 14%, rgba(0,0,0,0.04) 15%, transparent 16%, transparent 100%),
+    conic-gradient(
+      from 30deg,
+      #1A5FA0, #2878C8, #4A94DA, #72B4E8, #A0D0F2, #C8E4FA, #E4F2FC, #EAE6DA,
+      #1A5FA0, #2878C8, #4A94DA, #72B4E8, #A0D0F2, #C8E4FA, #E4F2FC, #EAE6DA,
+      #1A5FA0, #2878C8, #4A94DA, #72B4E8, #A0D0F2, #C8E4FA, #E4F2FC, #EAE6DA,
+      #1A5FA0, #2878C8, #4A94DA, #72B4E8, #A0D0F2, #C8E4FA, #E4F2FC, #EAE6DA
+    );
+}
+
+/* --- Sky (Pale blue swirl) --- */
+[data-color="sky"] .cd-surface {
+  background:
+    radial-gradient(circle at center, transparent 14%, rgba(0,0,0,0.04) 15%, transparent 16%, transparent 100%),
+    conic-gradient(
+      from 60deg,
+      #2A7AB8, #4498D0, #64B0E0, #88C8EC, #A8DAF4, #C8E8FA, #E0F2FC, #ECE8DC,
+      #2A7AB8, #4498D0, #64B0E0, #88C8EC, #A8DAF4, #C8E8FA, #E0F2FC, #ECE8DC,
+      #2A7AB8, #4498D0, #64B0E0, #88C8EC, #A8DAF4, #C8E8FA, #E0F2FC, #ECE8DC,
+      #2A7AB8, #4498D0, #64B0E0, #88C8EC, #A8DAF4, #C8E8FA, #E0F2FC, #ECE8DC
+    );
+}
+
+/* --- Navy (Dark deep swirl) --- */
+[data-color="navy"] .cd-surface {
+  background:
+    radial-gradient(circle at center, transparent 14%, rgba(0,0,0,0.04) 15%, transparent 16%, transparent 100%),
+    conic-gradient(
+      from 90deg,
+      #08264A, #0D3B66, #14508A, #1E6AAC, #3084C4, #50A0DC, #80C0EC, #C8C4B4,
+      #08264A, #0D3B66, #14508A, #1E6AAC, #3084C4, #50A0DC, #80C0EC, #C8C4B4,
+      #08264A, #0D3B66, #14508A, #1E6AAC, #3084C4, #50A0DC, #80C0EC, #C8C4B4,
+      #08264A, #0D3B66, #14508A, #1E6AAC, #3084C4, #50A0DC, #80C0EC, #C8C4B4
+    );
+}
+
+/* --- Teal (Cool blue-green swirl) --- */
+[data-color="teal"] .cd-surface {
+  background:
+    radial-gradient(circle at center, transparent 14%, rgba(0,0,0,0.04) 15%, transparent 16%, transparent 100%),
+    conic-gradient(
+      from 120deg,
+      #0A5060, #127888, #1A98AA, #30B4C8, #58CCE0, #88E0F0, #B0ECF6, #E4E0D4,
+      #0A5060, #127888, #1A98AA, #30B4C8, #58CCE0, #88E0F0, #B0ECF6, #E4E0D4,
+      #0A5060, #127888, #1A98AA, #30B4C8, #58CCE0, #88E0F0, #B0ECF6, #E4E0D4,
+      #0A5060, #127888, #1A98AA, #30B4C8, #58CCE0, #88E0F0, #B0ECF6, #E4E0D4
+    );
+}
+
+/* --- Indigo (Deep blue-purple swirl) --- */
+[data-color="indigo"] .cd-surface {
+  background:
+    radial-gradient(circle at center, transparent 14%, rgba(0,0,0,0.04) 15%, transparent 16%, transparent 100%),
+    conic-gradient(
+      from 150deg,
+      #1A1E5A, #2834A0, #3844C8, #5060E0, #7888F0, #A0B0F8, #C4D0FC, #E8E4D8,
+      #1A1E5A, #2834A0, #3844C8, #5060E0, #7888F0, #A0B0F8, #C4D0FC, #E8E4D8,
+      #1A1E5A, #2834A0, #3844C8, #5060E0, #7888F0, #A0B0F8, #C4D0FC, #E8E4D8,
+      #1A1E5A, #2834A0, #3844C8, #5060E0, #7888F0, #A0B0F8, #C4D0FC, #E8E4D8
+    );
+}
+
+/* --- Steel (Cool grey-blue swirl) --- */
+[data-color="steel"] .cd-surface {
+  background:
+    radial-gradient(circle at center, transparent 14%, rgba(0,0,0,0.04) 15%, transparent 16%, transparent 100%),
+    conic-gradient(
+      from 200deg,
+      #2C3E50, #3D5A80, #5080A8, #6CA0C0, #8CBAD4, #ACD0E4, #C8E0F0, #E6E2D6,
+      #2C3E50, #3D5A80, #5080A8, #6CA0C0, #8CBAD4, #ACD0E4, #C8E0F0, #E6E2D6,
+      #2C3E50, #3D5A80, #5080A8, #6CA0C0, #8CBAD4, #ACD0E4, #C8E0F0, #E6E2D6,
+      #2C3E50, #3D5A80, #5080A8, #6CA0C0, #8CBAD4, #ACD0E4, #C8E0F0, #E6E2D6
+    );
+}
+
+/* --- Cobalt (Medium blue swirl) --- */
+[data-color="cobalt"] .cd-surface {
+  background:
+    radial-gradient(circle at center, transparent 14%, rgba(0,0,0,0.04) 15%, transparent 16%, transparent 100%),
+    conic-gradient(
+      from 240deg,
+      #0047AB, #1860C0, #3878D4, #5894E4, #78B0EE, #A0CCF4, #C0E0FA, #E8E4D8,
+      #0047AB, #1860C0, #3878D4, #5894E4, #78B0EE, #A0CCF4, #C0E0FA, #E8E4D8,
+      #0047AB, #1860C0, #3878D4, #5894E4, #78B0EE, #A0CCF4, #C0E0FA, #E8E4D8,
+      #0047AB, #1860C0, #3878D4, #5894E4, #78B0EE, #A0CCF4, #C0E0FA, #E8E4D8
+    );
+}
+
+/* --- Rainbow (Full spectrum swirl — the hero piece) --- */
+[data-color="rainbow"] .cd-surface {
+  background:
+    radial-gradient(circle at center, transparent 14%, rgba(0,0,0,0.06) 15%, transparent 16%, transparent 100%),
+    conic-gradient(
+      from 0deg,
+      #D42B38, #E86030, #F09828, #F0C830, #58B866, #2C8A90, #3850D8, #6008A0,
+      #D42B38, #E86030, #F09828, #F0C830, #58B866, #2C8A90, #3850D8, #6008A0,
+      #D42B38, #E86030, #F09828, #F0C830, #58B866, #2C8A90, #3850D8, #6008A0,
+      #D42B38, #E86030, #F09828, #F0C830, #58B866, #2C8A90, #3850D8, #6008A0
+    );
+}
+
+[data-color="rainbow"] .cd-sheen {
+  animation-duration: 6s;
+}
+
+
+/* ---------- Scroll Hint ---------- */
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 10;
+  opacity: 0.5;
+  animation: fadeInUp 1s ease 1s both;
+}
+
+.scroll-hint span {
+  font-size: 0.75rem;
+  /* lowercase throughout */
+  letter-spacing: 0.15em;
+  color: var(--text-soft);
+}
+
+.scroll-arrow {
+  animation: bounce 2s ease infinite;
+  font-size: 1.2rem;
+  color: var(--text-soft);
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(6px); }
+  60% { transform: translateY(3px); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 0.5;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ---------- Sections (General) ---------- */
+.section {
+  padding: 6rem 2rem;
+  position: relative;
+}
+
+.section-inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  color: var(--blue-deep);
+}
+
+.section-intro {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--text-soft);
+  max-width: 560px;
+  margin-bottom: 3rem;
+  line-height: 1.7;
+}
+
+/* ---------- About Section ---------- */
+
+.section-about .section-content {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-lead {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+
+.about-text p {
+  color: var(--text-soft);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  font-weight: 300;
+}
+
+.about-text strong {
+  color: var(--blue-deep);
+  font-weight: 500;
+}
+
+.about-visual {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-image {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- Services Section ---------- */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.service-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 1.5rem 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-2px);
+}
+
+.service-icon {
+  margin-bottom: 1.25rem;
+}
+
+.service-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+  color: var(--blue-deep);
+}
+
+.service-card p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+/* ---------- Locations Section ---------- */
+
+.locations-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+}
+
+.location-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  transition: transform 0.2s ease;
+}
+
+.location-card:hover {
+  transform: translateX(4px);
+}
+
+.location-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+  color: var(--blue-deep);
+}
+
+.location-card p {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--orange);
+  margin-bottom: 0;
+}
+
+/* ---------- Contact Section ---------- */
+.section-contact {
+  text-align: center;
+}
+
+.section-contact .section-title {
+  text-align: center;
+}
+
+.section-contact .section-intro {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 3rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  transition: transform 0.2s ease;
+  min-width: 200px;
+}
+
+.contact-card:hover {
+  transform: translateY(-2px);
+}
+
+.contact-label {
+  font-size: 0.75rem;
+  /* lowercase throughout */
+  letter-spacing: 0.12em;
+  color: var(--text-soft);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.contact-value {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--blue-deep);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  padding: 2rem 2.5rem;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--blue-deep);
+  text-decoration: none;
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  font-weight: 300;
+}
+
+.footer-tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+
+/* ---------- Animations ---------- */
+.cd.draggable,
+.draggable-image.draggable {
+  animation: floatIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.cd.draggable:nth-child(1) { animation-delay: 0.1s; }
+.cd.draggable:nth-child(2) { animation-delay: 0.2s; }
+.cd.draggable:nth-child(3) { animation-delay: 0.3s; }
+.cd.draggable:nth-child(4) { animation-delay: 0.35s; }
+.cd.draggable:nth-child(5) { animation-delay: 0.45s; }
+.cd.draggable:nth-child(6) { animation-delay: 0.55s; }
+.cd.draggable:nth-child(7) { animation-delay: 0.6s; }
+.cd.draggable:nth-child(8) { animation-delay: 0.7s; }
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: rotate(var(--cd-rotate, 0deg)) scale(0.4) translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(var(--cd-rotate, 0deg)) scale(1) translateY(0);
+  }
+}
+
+/* Sections fade in on scroll */
+.section-inner {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section-inner.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .locations-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .section-about .section-content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .about-visual {
+    order: -1;
+  }
+
+  :root {
+    --cd-size: 140px;
+    --cd-size-small: 100px;
+    --cd-size-large: 200px;
+  }
+
+  .draggable-image img {
+    width: 160px;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav {
+    padding: 1rem 1.25rem;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .nav-links a {
+    font-size: 0.72rem;
+  }
+
+  .hero {
+    padding-top: 5rem;
+  }
+
+  .section {
+    padding: 4rem 1.25rem;
+  }
+
+  .locations-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .contact-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  :root {
+    --cd-size: 105px;
+    --cd-size-small: 75px;
+    --cd-size-large: 150px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .draggable-image img {
+    width: 120px;
+  }
+
+  body {
+    background-size: 20px 20px;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 19px,
+        var(--bg-grid) 19px,
+        var(--bg-grid) 20px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 19px,
+        var(--bg-grid) 19px,
+        var(--bg-grid) 20px
+      );
+  }
+}

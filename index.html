@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>aha.cd — we digitise your memories</title>
+  <meta name="description" content="aha.cd digitises your CDs into high-quality digital files. family videos, old photos, forgotten memories — all rescued from disc.">
+  <meta property="og:title" content="aha.cd — we digitise your memories">
+  <meta property="og:description" content="that box of CDs in the attic? we'll turn them into digital files you can actually use.">
+  <meta name="theme-color" content="#F2F0E8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="#hero" class="nav-logo">aha.cd</a>
+    <div class="nav-links">
+      <a href="#about">about</a>
+      <a href="#services">services</a>
+      <a href="#locations">locations</a>
+      <a href="#contact">contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Draggable CDs -->
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">that's where<br>i left it!</h1>
+      <p class="hero-subtitle">digitizing cd services in highland park</p>
+    </div>
+
+    <!-- Draggable CDs scattered across the hero -->
+    <div class="cd-scatter" id="cdScatter">
+      <div class="draggable-image draggable" style="--cd-x: 75%; --cd-y: 10%;">
+        <img src="assets/computer.png" alt="Retro Apple II computer" draggable="false" class="img-medium">
+        <span class="cd-label">won't be using this</span>
+      </div>
+
+      <div class="draggable-image draggable" style="--cd-x: 12%; --cd-y: 8%;">
+        <img src="assets/cd-stack-photo.png" alt="Stack of CD jewel cases" draggable="false">
+        <span class="cd-label">bring us these</span>
+      </div>
+
+      <div class="draggable-image draggable" style="--cd-x: 78%; --cd-y: 52%;">
+        <img src="assets/rainbow-cd.png" alt="Rainbow CD disc" draggable="false" class="img-cd">
+        <span class="cd-label">remember these?</span>
+      </div>
+
+      <div class="draggable-image draggable" style="--cd-x: 8%; --cd-y: 40%;">
+        <img src="assets/blue-cd.png" alt="Blue holographic CD" draggable="false" class="img-cd">
+      </div>
+
+      <div class="draggable-image draggable" style="--cd-x: 18%; --cd-y: 55%;">
+        <img src="assets/girl.png" alt="Girl holding box of CDs" draggable="false" class="img-person">
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>scroll to explore</span>
+      <div class="scroll-arrow">&#8595;</div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section section-about">
+    <div class="section-inner">
+      <h2 class="section-title">about</h2>
+      <div class="section-content">
+        <div class="about-text">
+          <p class="about-lead">
+            remember that box of CDs tucked away in the attic? the family holiday videos, 
+            the birthday parties on disc, the slideshow your dad burned of every christmas since '98?
+          </p>
+          <p>
+            <strong>aha.cd</strong> exists because those moments deserve better than gathering dust in a box 
+            nobody owns a player for anymore. we're a small team who carefully digitise your CDs 
+            into files you can actually watch, share, and keep safe — whether it's home videos, 
+            photo archives, old music collections, or whatever memories are sitting on those discs.
+          </p>
+          <p>
+            every disc is handled with care, cleaned if needed, and converted at the highest quality. 
+            we organise your files properly and deliver them back to you digitally — 
+            ready to share with the family group chat or save for the next generation.
+          </p>
+        </div>
+        <div class="about-visual">
+          <img src="assets/family.png" alt="Retro family wearing aha.cd t-shirts" class="about-image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section section-services">
+    <div class="section-inner">
+      <h2 class="section-title">services</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>standard rip</h3>
+          <p>your CDs converted into common digital formats — ready to view, play, or share. perfect for getting everything off disc and onto your devices.</p>
+        </div>
+        <div class="service-card">
+          <h3>lossless rip</h3>
+          <p>bit-perfect copies that preserve every detail of your original disc. for when the quality really matters — no compression, no shortcuts.</p>
+        </div>
+        <div class="service-card">
+          <h3>full collection</h3>
+          <p>got a whole shelf? we'll digitise your entire collection with bulk pricing. pick-up and delivery included.</p>
+        </div>
+        <div class="service-card">
+          <h3>rescue &amp; repair</h3>
+          <p>scratched or damaged discs? we'll do our best to recover your memories with professional-grade error correction.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Locations Section -->
+  <section id="locations" class="section section-locations">
+    <div class="section-inner">
+      <h2 class="section-title">locations</h2>
+      <p class="section-intro">we currently offer drop-off and pick-up service in the following areas. more coming soon!</p>
+      <div class="locations-grid">
+        <div class="location-card">
+          <h3>highland park</h3>
+          <p>drop-off &amp; pick-up</p>
+        </div>
+        <div class="location-card">
+          <h3>mount washington</h3>
+          <p>drop-off &amp; pick-up</p>
+        </div>
+        <div class="location-card">
+          <h3>eagle rock</h3>
+          <p>drop-off &amp; pick-up</p>
+        </div>
+        <div class="location-card">
+          <h3>glendale</h3>
+          <p>drop-off &amp; pick-up</p>
+        </div>
+        <div class="location-card">
+          <h3>pasadena</h3>
+          <p>drop-off &amp; pick-up</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section section-contact">
+    <div class="section-inner">
+      <h2 class="section-title">get in touch</h2>
+      <div class="contact-grid">
+        <a href="tel:+12137217598" class="contact-card">
+          <span class="contact-label">phone</span>
+          <span class="contact-value">(+1) 213-721-7598</span>
+        </a>
+        <a href="mailto:ahadotcd@gmail.com" class="contact-card">
+          <span class="contact-label">email</span>
+          <span class="contact-value">ahadotcd@gmail.com</span>
+        </a>
+        <a href="https://instagram.com/aha.cd" target="_blank" rel="noopener" class="contact-card">
+          <span class="contact-label">instagram</span>
+          <span class="contact-value">@aha.cd</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-logo">aha.cd</span>
+      <span class="footer-copy">&copy; 2026 aha.cd</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
