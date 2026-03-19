@@ -113,6 +113,13 @@
           currentLeft += velocityX;
           currentTop += velocityY;
 
+          // Clamp within parent bounds
+          const parentRect = cd.parentElement.getBoundingClientRect();
+          const maxLeft = parentRect.width - 40;
+          const maxTop = parentRect.height - 40;
+          currentLeft = Math.max(-40, Math.min(currentLeft, maxLeft));
+          currentTop = Math.max(-40, Math.min(currentTop, maxTop));
+
           cd.style.left = `${currentLeft}px`;
           cd.style.top = `${currentTop}px`;
 
